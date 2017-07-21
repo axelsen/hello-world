@@ -1,12 +1,10 @@
-# hello-world
-~ The initiation of food for the hungry
-
-I am all about aboutness and the gooditude of latitude, longtiude, solitude and sociatude.
-
-
-@app.route('/order', methods=('GET', 'POST'))
-def order_lunch():
+@app.route('/new_post', methods=('GET', 'POST')
+@login_required
+def post():
+    form = forms.PostForm()
     if form.validate_on_submit():
-        models.LunchOrder.create()
-        g.user = current_user
-    return render_template('lunch.html')
+        models.Post.create(user=g.user._get_current_object(),
+                           content=form.content.data.strip())
+        flash("Message posted! Thanks!", "success")
+        return redirect(url_for('index'))
+    return render_template('post.html', form=form)
