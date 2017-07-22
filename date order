@@ -1,0 +1,2 @@
+<h2><!-- today's date -->{{ order.date.strftime('%Y-%m-%d') }}</h2>
+<p><!-- print today's lunch order -->{{ order.order }}</p>
