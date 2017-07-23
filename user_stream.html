@@ -27,7 +27,7 @@
                     <a href="{{ url_for('follow', username=user.username) }}" class="small">Follow</a>
                 {% else %}
                     <a href="{{ url_for('unfollow', username=user.username) }}" class="small">Unfollow</a>
-                {% endif %}    
+                {% endif %}
             {% endif %}
         {% endif %}
     </div>
