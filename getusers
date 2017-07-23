@@ -131,7 +131,7 @@ def follow(username):
         else:
             flash("You're now following {}!".format(to_user.username), "success")
     return redirect(url_for('stream', username=to_user.username))
-
+                  
 @app.route('/unfollow/<username>')
 @login_required
 def unfollow(username):
@@ -148,7 +148,7 @@ def unfollow(username):
         except models.IntegrityError:
             pass
         else:
-            flash("You've unfollowed {}!".format(to_user.username), "success")
+            flash("You've unfollowed {}.".format(to_user.username), "success")
     return redirect(url_for('stream', username=to_user.username))
 
 if __name__ == '__main__':
