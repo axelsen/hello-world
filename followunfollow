@@ -1,16 +1,16 @@
 @app.route('/follow/<int:user_id>')
 @login_required
 def follow(user_id):
+  try:
+      to_user = models.User.get(models.User.id==user_id)
+  except models.DoesNotExist:
+    pass
+  else:
     try:
-        to_user = models.User.get(models.User.id==user_id)
-    except models.DoesNotExist:
-        pass
-    else:
-        try:
-            models.Relationship.create(
-                from_user = g.user._get_current_object(),
-                to_user = to_user,
-            )
-        except models.IntegrityError:
-            pass
-    return riderect(url_for('index'))
+      models.Relationship.create(
+          from_user = g.user._get_current_object(),
+          to_user = to_user,
+        )
+    except models.IntegrityError:
+      pass
+  return redirect(url_for("index"))
