@@ -1,0 +1,50 @@
+from flask import Blueprint
+
+from flask.ext.restful import Resource, Api, reqparse, inputs
+
+import models
+
+
+class IngredientList(Resource):
+    def get(self):
+        return 'IngredientList'
+    
+    def __init__(self):
+        self.reqparse  = reqparse.RequestParser()
+        self.reqparse.add_argument(
+            'name',
+            required=True,
+            location=["form", "json"]
+        )
+        self.reqparse.add_argument(
+            'description',
+            required=True,
+            location=["form", "json"]
+        )
+        self.reqparse.add_argument(
+            'measurement_type',
+            required=True,
+            location=["form", "json"]
+        )
+        self.reqparse.add_argument(
+            'quantity',
+            required=True,
+            location=["form", "json"]
+            type=float
+        )
+        self.reqparse.add_argument(
+            'recipe',
+            required=True,
+            location=["form", "json"],
+            type=inputs.positive
+        )
+
+
+class Ingredient(Resource):
+    def get(self, id):
+        return 'Ingredient'
+
+ingredients_api = Blueprint('resources.ingredients', __name__)
+api = Api(ingredients_api)
+api.add_resource(IngredientList, '/api/v1/ingredients')
+api.add_resource(Ingredient, '/api/v1/ingredients/<int:id>')
