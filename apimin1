@@ -8,34 +8,34 @@ import models
 class IngredientList(Resource):
     def get(self):
         return 'IngredientList'
-    
-    def __init__(self):
-        self.reqparse  = reqparse.RequestParser()
+
+    __init__(self):
+        self.reqparse = reqparse.RequestParser()
         self.reqparse.add_argument(
             'name',
             required=True,
-            location=["form", "json"]
+            location=["form","json"]
         )
         self.reqparse.add_argument(
             'description',
             required=True,
-            location=["form", "json"]
+            location=["form","json"]
         )
         self.reqparse.add_argument(
             'measurement_type',
             required=True,
-            location=["form", "json"]
+            location=["form","json"]
         )
         self.reqparse.add_argument(
             'quantity',
             required=True,
-            location=["form", "json"]
+            location=["form","json"],
             type=float
         )
         self.reqparse.add_argument(
             'recipe',
             required=True,
-            location=["form", "json"],
+            location=["form","json"],
             type=inputs.positive
         )
 
